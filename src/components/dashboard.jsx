@@ -81,7 +81,7 @@ const Dashboard = () => {
                 0% completion rate
               </p>
             </div>
-            <span className="text-white text-[14px] flex justify-center pt-2">
+            <span className="text-white text-[14px] flex justify-center pt-1">
               Tasks
             </span>
           </div>

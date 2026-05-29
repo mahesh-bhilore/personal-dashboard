@@ -12,6 +12,7 @@ import { useState } from "react";
 const Expenses = () => {
   const [Newtransaction, setNewtransaction] = useState(false);
   const [Recurring, setRecurring] = useState(false);
+  const [Addmoney,setAddmoney] = useState(false);
 
   return (
     <>
@@ -27,10 +28,10 @@ const Expenses = () => {
             </div>
             <div>
               <h1 className="text font-semibold text-2xl w-[227.1px] h-[32px]">
-                Dashboard Overview
+                Expense Tracker
               </h1>
               <h3 className="text  text-[#65514a] text-[14px] w-[238.62px] h-[20px]">
-                Your productivity and financial insights
+                Manage your finances effectively
               </h3>
             </div>
           </div>
@@ -162,99 +163,204 @@ const Expenses = () => {
               </span>
 
               <div className="flex justify-between items-center w-[1100px]">
-                <button className="w-[543px] h-[42px] rounded-[10px] border border-gray-400 bg-[#F3F4F6]">
+                <button 
+                onClick={() => setAddmoney("Income")} 
+                className={`w-[543px] h-[42px] rounded-[10px] border border-gray-400  ${Addmoney === "Income" ? "bg-[#00A63E]" : "bg-[#F3F4F6]"}`}>
                   Income
                 </button>
-                <button className="w-[543px] h-[42px] rounded-[10px] border border-gray-400 bg-[#F3F4F6]">
+                <button 
+                onClick={() => setAddmoney("Expense")} 
+                className={`w-[543px] h-[42px] rounded-[10px] border border-gray-400  ${Addmoney === "Expense" ? "bg-[#E7000B]" : "bg-[#F3F4F6]"} `}>
                   Expense
                 </button>
               </div>
 
-              <div className="flex justify-between items-center w-[1100px]">
-                <input
-                  type="text"
-                  placeholder="Title..."
-                  className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400"
-                ></input>
-                <input
-                  type="number"
-                  placeholder="Amount..."
-                  className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400"
-                ></input>
-              </div>
+              {/* Income */}
+              {Addmoney === "Income" && (
+                <div className="flex flex-col gap-4">
+                  <div className="flex justify-between items-center w-[1100px]">
+                    <input
+                      type="text"
+                      placeholder="Title..."
+                      className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400"
+                    ></input>
+                    <input
+                      type="number"
+                      placeholder="Amount..."
+                      className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400"
+                    ></input>
+                  </div>
 
-              <div className="flex justify-between items-center w-[1100px]">
-                <select className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400 ">
-                  <option>Select Category</option>
-                  <option>Salary</option>
-                  <option>Freelance</option>
-                  <option>Business</option>
-                  <option>Investment</option>
-                  <option>Gift</option>
-                  <option>Bonus</option>
-                </select>
-                <input
-                  type="text"
-                  placeholder="Subcategory (optional)..."
-                  className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400"
-                ></input>
-              </div>
+                  <div className="flex justify-between items-center w-[1100px]">
+                    <select className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400 ">
+                      <option>Select Category</option>
+                      <option>Salary</option>
+                      <option>Freelance</option>
+                      <option>Business</option>
+                      <option>Investment</option>
+                      <option>Gift</option>
+                      <option>Bonus</option>
+                    </select>
+                    <input
+                      type="text"
+                      placeholder="Subcategory (optional)..."
+                      className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400"
+                    ></input>
+                  </div>
 
-              <div className="flex justify-between items-center w-[1100px]">
-                <input
-                  type="date"
-                  className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400 "
-                ></input>
-                <select className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400 ">
-                  <option>Payment Method</option>
-                  <option>Cash</option>
-                  <option>Credit Card</option>
-                  <option>Debit Card</option>
-                  <option>Bank Transfer</option>
-                  <option>Other</option>
-                </select>
-              </div>
+                  <div className="flex justify-between items-center w-[1100px]">
+                    <input
+                      type="date"
+                      className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400 "
+                    ></input>
+                    <select className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400 ">
+                      <option>Payment Method</option>
+                      <option>Cash</option>
+                      <option>Credit Card</option>
+                      <option>Debit Card</option>
+                      <option>Bank Transfer</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
 
-              <input
-                type="text"
-                placeholder="Tags (comma separated)..."
-                className="w-[1100px] h-[42px] rounded-[10px] border border-gray-400 px-4"
-              ></input>
+                  <input
+                    type="text"
+                    placeholder="Tags (comma separated)..."
+                    className="w-[1100px] h-[42px] rounded-[10px] border border-gray-400 px-4"
+                  ></input>
 
-              <span className="flex items-center gap-4">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4"
-                  onClick={() => setRecurring(!Recurring)}
-                ></input>
-                <span>Recurring transaction</span>
-                {Recurring && (
-                  <select className="px-4 py-2 border border-gray-400 rounded-[10px]">
-                    <option>Daily</option>
-                    <option>Weekly</option>
-                    <option>Monthly</option>
-                    <option>Yearly</option>
-                  </select>
-                )}
-              </span>
+                  <span className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4"
+                      onClick={() => setRecurring(!Recurring)}
+                    ></input>
+                    <span>Recurring transaction</span>
+                    {Recurring && (
+                      <select className="px-2 py-2 border border-gray-400 rounded-[10px]">
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Yearly</option>
+                      </select>
+                    )}
+                  </span>
 
-              <textarea
-                type="text"
-                placeholder="Notes (optional)..."
-                className="border border-gray-400 rounded-[10px] px-4 py-2 h-[70px] w-[1100px]"
-              ></textarea>
+                  <textarea
+                    type="text"
+                    placeholder="Notes (optional)..."
+                    className="border border-gray-400 rounded-[10px] px-4 py-2 h-[70px] w-[1100px]"
+                  ></textarea>
 
-              <div className="w-[1100px] h-[70px] flex justify-between">
-                <button className="w-[1000px] h-[40px] bg-[#00A63E] rounded-[10px] text-white hover:bg-green-700">
-                  Create Task
-                </button>
-                <button
-                  onClick={() => setNewtransaction(false)}
-                  className="w-[79px] h-[40px] bg-[#D1D5DC] rounded-[10px] text text-[14.3px] font-semibold hover:bg-gray-400"
-                >
-                  Cancel
-                </button>
-              </div>
+                  <div className="w-[1100px] h-[70px] flex justify-between">
+                    <button className="w-[1000px] h-[40px] bg-[#00A63E] rounded-[10px] text-white hover:bg-green-700">
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setNewtransaction(false)}
+                      className="w-[79px] h-[40px] bg-[#D1D5DC] rounded-[10px] text text-[14.3px] font-semibold hover:bg-gray-400"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>  
+              )}
+
+              {/* Expense */}
+              {Addmoney === "Expense" && (
+                <div className="flex flex-col gap-4">
+                  <div className="flex justify-between items-center w-[1100px]">
+                    <input
+                      type="text"
+                      placeholder="Title..."
+                      className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400"
+                    ></input>
+                    <input
+                      type="number"
+                      placeholder="Amount..."
+                      className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400"
+                    ></input>
+                  </div>
+
+                  <div className="flex justify-between items-center w-[1100px]">
+                    <select className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400 ">
+                      <option>Select Category</option>
+                      <option>Food & Dinning</option>
+                      <option>Trasportation</option>
+                      <option>Shopping</option>
+                      <option>Entertainment</option>
+                      <option>Bills & Utilities</option>
+                      <option>Healthcare</option>
+                      <option>Education</option>
+                      <option>Travel</option>
+                      <option>Insurance</option>
+                      <option>Other</option>
+                    </select>
+                    <input
+                      type="text"
+                      placeholder="Subcategory (optional)..."
+                      className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400"
+                    ></input>
+                  </div>
+
+                  <div className="flex justify-between items-center w-[1100px]">
+                    <input
+                      type="date"
+                      className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400 "
+                    ></input>
+                    <select className="w-[543px] h-[42px] px-4 rounded-[10px] border border-gray-400 ">
+                      <option>Payment Method</option>
+                      <option>Cash</option>
+                      <option>Credit Card</option>
+                      <option>Debit Card</option>
+                      <option>Bank Transfer</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+
+                  <input
+                    type="text"
+                    placeholder="Tags (comma separated)..."
+                    className="w-[1100px] h-[42px] rounded-[10px] border border-gray-400 px-4"
+                  ></input>
+
+                  <span className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4"
+                      onClick={() => setRecurring(!Recurring)}
+                    ></input>
+                    <span>Recurring transaction</span>
+                    {Recurring && (
+                      <select className="px-2 py-2 border border-gray-400 rounded-[10px]">
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Yearly</option>
+                      </select>
+                    )}
+                  </span>
+
+                  <textarea
+                    type="text"
+                    placeholder="Notes (optional)..."
+                    className="border border-gray-400 rounded-[10px] px-4 py-2 h-[70px] w-[1100px]"
+                  ></textarea>
+
+                  <div className="w-[1100px] h-[70px] flex justify-between">
+                    <button className="w-[1000px] h-[40px] bg-[#00A63E] rounded-[10px] text-white hover:bg-green-700">
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setNewtransaction(false)}
+                      className="w-[79px] h-[40px] bg-[#D1D5DC] rounded-[10px] text text-[14.3px] font-semibold hover:bg-gray-400"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>  
+              )}
+
             </div>
           )}
 
